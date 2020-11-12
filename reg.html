@@ -1,0 +1,229 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+
+	<head>
+		<meta charset="utf-8">
+		<title>会员注册</title>
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+
+		<script type="text/javascript" src="js/jquery-1.7.1.js"></script> <!--千万别忘记引用jQuery文件，否则无法执行--> 
+		<script type="text/javascript"> 
+			$(function(){ 
+				$("#user").blur(function(){ 
+					$.ajax({ 
+						url:"check_user.php", //请求验证页面 
+						type:"POST", //请求方式 可换为post 注意验证页面接收方式 
+						data:"user="+$("#user").val(), //取得表文本框数据，作为提交数据 注意前面的 user 此处格式 key=value 其他方式请参考ajax手册 
+						success: function(data) 
+						{ //请求成功时执行操作 
+							$("#chk").html(data); //向ID为chk的元素内添加html代码 
+						} 
+					}); 
+				}) 
+			}) 
+		</script> 
+	</head>
+	<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript"> 
+		var countdown=60; 
+		function sendemail(){
+		    var obj = $("#yanzhengma");
+		    settime(obj);
+		    
+		    }
+		function settime(obj) { //发送验证码倒计时
+		    if (countdown == 0) { 
+		        obj.attr('disabled',false); 
+		        //obj.removeattr("disabled"); 
+		        obj.val("免费获取验证码");
+		        countdown = 60; 
+		        return;
+		    } else { 
+		        obj.attr('disabled',true);
+		        obj.val("重新发送(" + countdown + ")");
+		        countdown--; 
+		    } 
+		setTimeout(function() { 
+		    settime(obj) }
+		    ,1000) 
+		}
+	</script>
+	<!---------验证输入密码是否一致---->
+	<script>
+          function validate() {
+              var pwd1 = document.getElementById("pwd1").value;
+              var pwd2 = document.getElementById("pwd2").value;
+		<!-- 对比两次输入的密码 -->
+              if(pwd1 == pwd2) {
+                  document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";
+                  document.getElementById("submit").disabled = false;
+              }
+              else {
+                  document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";
+                document.getElementById("submit").disabled = true;
+              }
+          }
+      </script>
+	<body>
+		<div class="wrap">
+			<!-- start of 头部导航-->
+			<div class="head_top">
+				<div class="head clearfix">
+					<!--头部左边-->
+				  <div class="topLeft left">
+						<a href="index.php" title="七颗星">
+							<img width="244" height="55" src="images/logos/logo.jpg">
+						</a>
+						<span>七颗星电脑商城</span>
+					</div>
+					<!--头部左边end-->
+					<!--头部右边-->
+					<ul class="topRight right">
+						<li>国际权威认证</li>
+						<li class="tr_2">15天无理由退换</li>
+						<li class="tr_3">一年保修</li>
+					</ul>
+					<!--头部左边end-->
+				</div>
+			</div>
+			<!--end of 头部导航-->
+			<!-- starto of container -->
+			<div class="container" style="background: url('images/background/bg_login.png') no-repeat center;">
+				<!--中间内容-->
+				<div class="cmain ddd">
+					<!--内容右边-->
+					<div class="cort-right right">
+						<div class="r_bg"></div>
+						<!--登陆框内-->
+						<div class="cr_border">
+							
+
+							<form method="post" action="reg.php" class="form_first" id="formdata">
+								<input type="hidden" value="1" name="type">
+								<input type="hidden" value="login.php" name="forward">
+								<input type="hidden" value="H6mY5VyS" name="skey">
+								<div style="" class="photo_show">
+									<!--手机-->
+									<div class="the_input">
+										<span class="member"></span>
+										<input type="text" placeholder="请输入手机号码" class="al_Input dr_photo" name="user" id="user" required="true">
+									</div>
+									<div>
+										<span id="chk"></span>
+									</div>
+									
+									<!--手机end-->
+									<!--密码-->
+									<div style="border:none" class="the_input">
+										<span class="password"></span>
+										<input type="text" style="width:133px;" placeholder="请输入验证码" class="al_Input ls" name="yanzhengma" required="true">
+										<input type="button" id="yanzhengma" value="获取验证码" onclick="sendemail()" class="action mobile_action"/> 
+									</div>
+
+									<!--验证码end-->
+									<!--密码-->
+									<div class="the_input ">
+										<span class="pw"></span>
+										<input type="password" placeholder="请输入密码" required="true" maxlength="21" class="al_Input dr_photo" value="" name="mobile_pwd" id="pwd1">
+									</div>
+									<!--密码end-->
+									<!--密码-->
+									<div class="the_input ">
+										<span class="pw"></span>
+										<input type="password" placeholder="确认密码" required="true" maxlength="21" class="al_Input dr_photo" value="" name="mobile_pwd_confirm" id="pwd2" onkeyup="validate()">
+									</div>
+									<div>
+										<span id="tishi"></span>
+									</div>
+									<!--密码end-->
+
+									<!--其他合作-->
+									<div class="other_hz">
+										<input type="submit" value="立即注册" id="" class="up">
+									</div>
+									<!--其他合作end-->
+								</div>
+							</form>
+							<!--手机注册end-->
+						</div>
+						<!--登陆框内end-->
+					</div>
+					<!--内容右边end-->
+				</div>
+				<!--中间内容end-->
+			</div>
+			<!-- end of container -->
+
+			<!--底部end-->
+			<div class="cmain bc_yz">
+				<div class="db_cort">
+					<p> Copyright &copy; 2019 七颗星 All Rights Reserved. 鲁ICP备11012085号-2.ICP经营许可证鲁B2-20140279 </p>
+					<p> 中国互联网违法信息举报中心 | 中国公安网络110报警服务 | 本网站提供所售商品的正式发票 </p>
+				</div>
+			</div>
+			<script src="jquery.min.js"></script>
+			<script>
+				$(function(){
+					$("#btn").click(function(){
+					// 一次性获得表单数据
+					var formData = $("#formdata").serialize();
+
+					$.ajax({
+						url: 'reg.php',
+						type: 'post',
+						data: formData,
+					// 提交之前校验数据
+					beforeSend:function(){
+						if($('#mobile').val() == ''){
+							alert("注册手机号不能为空");
+							return false;
+						}
+					}
+					// success:function(data){
+					// // 查看php返回来的数据格式
+					// console.log(typeof data);
+					// // 将字符串转成对象我们想要的格式
+					// data = JSON.parse(data);
+					// console.log(data);
+					// if(data.code == 1){
+					// 	alert(data.msg);
+					// // 登录成功后跳转到另一个页面
+					// location.href = "08ajaxtempletechat.html";
+					// }else{
+					// 	alert(data.msg);
+					// }
+					//}
+					})
+
+
+					});
+				})
+			</script>
+			<script src="js/jquery.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				window.onload=function(){
+	                var button=document.getElementsByTagName("button")[0];
+	                button.innerText="获取验证码";
+	                var timer=null;
+	                button.onclick=function(){
+	                    clearInterval(timer);//这句话至关重要
+	                    var time=60;
+	                    var that=this;//习惯
+	                    timer=setInterval(function(){
+	                        console.log(time);
+	                        if(time<=0){
+	                            that.innerText="";
+	                            that.innerText="重新发送";
+	                            that.disabled=false;
+	                            
+	                        }else {
+	                            that.disabled=true;
+	                            that.innerText="";
+	                            that.innerText="剩余时间"+(time)+"秒";
+	                            time--;
+	                        }
+	                    },1000);
+	                }
+           		 }
+			</script>
+	</body>
+</html>
